@@ -29,7 +29,7 @@ public class SimonSays extends KeyAdapter {
 	private int tries = 0;
 	private boolean simonSays = false;
 	Date timeAtStart;
-
+	int points = 0;
 	private void makeAlbum() {
 		// 2. Add the four images that match keyboard keys like this:
 		// images.put(new Integer(KeyEvent.VK_UP), "up.jpg");
@@ -46,16 +46,23 @@ public class SimonSays extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
-		int points = 0;
+		
 		// 16. If the keyCode matches the imageIndex and "Simon says"
-		if (e.getKeyCode() == imageIndex) {
+		if ((e.getKeyCode() == imageIndex && simonSays)||(e.getKeyCode() != imageIndex && ! simonSays)) {
 			points = points+1;
 			speak("Correct");
-		}
+					}
 		else {
 			points = points-1;
 			speak("wrong");
+			
 		}
+		tries=tries+1;
+		if(tries == 15) {
+			System.out.println("you got "+ points +" out of 15 points");
+				System.exit(0);
+		}
+	
 		// 17. Increase the value of score
 
 		// 18. Use the speak method to tell the user they were correct
@@ -75,8 +82,9 @@ public class SimonSays extends KeyAdapter {
 		// 27. Exit the program
 
 		// 23. Dispose of the frame
-
+frame.dispose();
 		// 24. Call the showImage method to show a new image
+showImage();
 	}
 
 	private void showImage() {
@@ -105,7 +113,7 @@ public class SimonSays extends KeyAdapter {
 		} else {
 			speak("Press this key");
 		}
-		frame.add(getNextRandomImage());
+		
 		// 14. Above, set the value of simonSays to true/false appropriately
 
 	}
