@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,37 +21,64 @@ public class Calculator implements ActionListener {
 void start() {
 	frame.add(panel);
 	frame.setVisible(true);
+	panel.add(one);
+	panel.add(two);
 	panel.add(button);
 	panel.add(button1);
 	panel.add(button2);
 	panel.add(button3);
 	panel.add(label);
-	panel.add(one);
-	panel.add(two);
 	button.setText("add");
 	button1.setText("sub");
 	button2.setText("mul");
 	button3.setText("div");
+	one.setPreferredSize(new Dimension(100,30));
+	two.setPreferredSize(new Dimension(100,30));
 	button.addActionListener(this);
 	button1.addActionListener(this);
 	button2.addActionListener(this);
 	button3.addActionListener(this);
+	frame.pack();
+	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 }
-void add(){
+int add(int a,int b){
+	return a+b ;
 	
 }
-void subtract(){
+int subtract(int a,int b){
+	return a-b;
 	
 }
-void multiply(){
+int multiply(int a,int b){
+	return a*b;
 	
 }
-void Divide(){
+int Divide(int a, int b){
+	return a/b;
 	
 }
 @Override
 public void actionPerformed(ActionEvent e) {
-	
-	
+	JButton pressed = (JButton) e.getSource();
+	String num = one.getText();
+	String num1 = two.getText();
+	int on = Integer.parseInt(num);
+	int tw = Integer.parseInt(num1);
+	int res = 0;
+	if(pressed ==  button) {
+		res = add(on, tw);
+		
+	}
+	if(pressed == button1) {
+		res = subtract(on, tw);
+	}
+	if(pressed == button2) {
+		res = multiply(on, tw);
+	}
+	if(pressed == button3) {
+		res = Divide(on, tw);
+	}
+	label.setText(res + " ");
+	frame.pack();
 }
 }
