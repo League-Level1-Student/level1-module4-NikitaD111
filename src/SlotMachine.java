@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 
 public class SlotMachine implements ActionListener {
 	JButton button = new JButton();
+	String image1 = "lime.jpeg";
+	String image2 = "download.jpeg";
+	String image3 = "LidoxjjET.jpg";
 	int rand = new Random().nextInt(3);
 	JPanel panel = new JPanel();
 	JLabel one = new JLabel();
@@ -25,13 +28,12 @@ public static void main(String[] args) {
 }
 void Start() {
 	JFrame frame = new JFrame();
-	
 	frame.setVisible(true);
 	frame.add(panel);
 	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-	panel.add(one);
+	/*panel.add(one);
 	panel.add(two);
-	panel.add(three);
+	panel.add(three);*/
 	panel.add(button);
 	button.setText("SPIN!");
 	drawButtons();
@@ -49,23 +51,47 @@ Icon icon = new ImageIcon(imageURL);
 JLabel imageLabel = new JLabel(icon);
 return imageLabel;
 }
+
+
+
+
 @Override
 public void actionPerformed(ActionEvent e) {
+	System.out.println("hi");
 	JButton pressed = (JButton) e.getSource();
 	if (button == pressed ) {
-		
+		SlotMachine slot = new SlotMachine();
+		slot.drawButtons();
 	}
 	
 }
+	
 void drawButtons() {
+	
+
+	
+	for(int i = 0; i < 3; i++) {
+		int num1 = new Random().nextInt(3);
+		int num2 = new Random().nextInt(3);
+		int num3 = new Random().nextInt(3);
+		if(num1 == 0) {
+		image1 = "download.jpeg";
+		}
+		if(num2 == 1) {
+		image2 = "download.jpeg";
+		}
+		if(num3 == 2) {
+		image3 = "download.jpeg";
+		}
+		
+	}
 	try {
-		panel.add(createLabelImage("lime.jpeg"));
-		panel.add(createLabelImage("download.jpeg"));
-		panel.add(createLabelImage("LidoxjjET.jpg"));
+		panel.add(createLabelImage(image1));
+		panel.add(createLabelImage(image2));
+		panel.add(createLabelImage(image3));
 	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
-		System.out.println(rand);
+		
 	}
 }
 }
